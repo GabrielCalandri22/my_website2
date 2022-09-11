@@ -5,7 +5,7 @@ theme: forty
 googleAnalytics: ''
 disqusShortname: ''
 params:
-  banner:
+  banner: 
     buttonText: Get Started
     subtitle: Hi, my name is Gabriel Calandri. I am currently a MAM Student at LBS and am pleased to present you some pieces of my life and my work done so far.
     title: Gabriel Calandri's Portfolio
@@ -84,9 +84,9 @@ params:
         title: About Me
         url: blogs/aliquam
       - image: biden.jpg
-        subtitle: Evolution of Joe Biden's Approval Margins Over the Year
+        subtitle: Evolution of Joe Biden's Approval Margins Over the Year 2022
         title: Biden's Approval Margins
-        url: blogs/tempus
+        url: blogs/Biden_Approval
       - image: pic03.jpg
         subtitle: Lorem Etiam Nullam
         title: Magna
