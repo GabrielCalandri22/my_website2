@@ -1,0 +1,130 @@
+---
+categories:  
+- ""    
+- ""
+date: "2022-09-10"
+description: Excess rentals in TfL bike sharing
+draft: false
+image: santander.jpg
+
+keywords: ""
+slug: bike_sharing # slug is the shorthand URL address... no spaces plz
+title: Excess rentals in TfL bike sharing
+---
+
+
+
+<pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
+
+# Download TFL data to temporary file
+httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2022-09-06T12%3A41%3A48/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20220911%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220911T190939Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=91acc0733c73ced7ae569963ebc53de0d38159f4f85ab71f8f5ca4bf8550907a&amp;X-Amz-SignedHeaders=host]
+##   Date: 2022-09-11 19:09
+##   Status: 200
+##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+##   Size: 180 kB
+## &lt;ON DISK&gt;  C:\Users\GABRIE~1\AppData\Local\Temp\Rtmpwp5iGS\file4fdc7f643282.xlsx</code></pre>
+<pre class="r"><code># Use read_excel to read it as dataframe
+bike0 &lt;- read_excel(bike.temp,
+                   sheet = &quot;Data&quot;,
+                   range = cell_cols(&quot;A:B&quot;))
+
+# change dates to get year, month, and week
+bike &lt;- bike0 %&gt;% 
+  clean_names() %&gt;% 
+  rename (bikes_hired = number_of_bicycle_hires) %&gt;% 
+  mutate (year = year(day),
+          month = lubridate::month(day, label = TRUE),
+          week = isoweek(day))</code></pre>
+<p>The first one looks at percentage changes from the expected level of
+monthly rentals.</p>
+<pre class="r"><code>bike_monthly_avg&lt;-bike%&gt;%
+  filter(year %in% c(2017, 2018, 2019, 2020, 2021, 2022))%&gt;%
+  group_by(year, month)%&gt;%
+  summarise(monthly_avg=mean(bikes_hired))%&gt;%
+  ungroup()%&gt;%
+  add_row(year=2022, month=&quot;Sep&quot;)%&gt;%
+  add_row(year=2022, month=&quot;Oct&quot;)%&gt;%
+  add_row(year=2022, month=&quot;Nov&quot;)%&gt;%
+  add_row(year=2022, month=&quot;Dec&quot;)%&gt;%
+  group_by(year, month)%&gt;%
+  mutate(date=as.Date(paste(&quot;01&quot;, month, toString(year), sep=&quot;/&quot;), &quot;%d/%b/%Y&quot;))
+
+bike_monthly_avg_across_years&lt;-bike%&gt;%
+  filter(year %in% c(2016, 2017, 2018, 2019))%&gt;%
+  group_by(month)%&gt;%
+  summarise(monthly_avg_across_years=mean(bikes_hired))
+
+bike_monthly_avg &lt;-bike_monthly_avg%&gt;% 
+  inner_join(bike_monthly_avg_across_years, by = &quot;month&quot;)%&gt;%
+  mutate(monthly_avg_across_years=ifelse(year==2022 &amp; (month %in% c(&quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;)), NA, monthly_avg_across_years))
+  
+bike_monthly_avg</code></pre>
+<pre><code>## # A tibble: 72 × 5
+## # Groups:   year, month [72]
+##     year month monthly_avg date       monthly_avg_across_years
+##    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;date&gt;                        &lt;dbl&gt;
+##  1  2017 Jan        20596. 2017-01-01                   20617.
+##  2  2017 Feb        22091. 2017-02-01                   22049.
+##  3  2017 Mar        26444. 2017-03-01                   23237.
+##  4  2017 Apr        30591. 2017-04-01                   28299.
+##  5  2017 May        32019. 2017-05-01                   33270.
+##  6  2017 Jun        36610. 2017-06-01                   35413.
+##  7  2017 Jul        36511. 2017-07-01                   38109.
+##  8  2017 Aug        32071. 2017-08-01                   34393.
+##  9  2017 Sep        31158. 2017-09-01                   33013.
+## 10  2017 Oct        31409. 2017-10-01                   30235.
+## # … with 62 more rows</code></pre>
+<pre class="r"><code>library(ggbraid)
+
+ggplot(bike_monthly_avg,aes(x=date))+geom_line(aes(y=monthly_avg))+geom_line(aes(y=monthly_avg_across_years), color=&quot;blue&quot;, size=1)+facet_wrap(~year, scales=&quot;free_x&quot;, nrow=2) + scale_x_date(date_breaks = &quot;1 month&quot;, date_labels = &quot;%b&quot;)+
+  geom_braid(aes(ymin=monthly_avg, ymax=monthly_avg_across_years, fill=monthly_avg&gt;monthly_avg_across_years))+theme(legend.position=&quot;none&quot;)+
+  labs(title = &quot;Monthly changes in TfL bike rentals&quot;,
+       subtitle = &quot;Change from monthly average shown in blue and calculated between 2016-2019&quot;, 
+       caption = &quot;Source: TfL, London Data Store&quot;,y=&quot;Bike rentals&quot;, x = element_blank())</code></pre>
+<p><img src="/blogs/santander_files/figure-html/Chlng2_plot1-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>This graph looks at percentage changes from the expected level of
+weekly rentals. The two grey shaded rectangles correspond to Q2 (weeks
+14-26) and Q4 (weeks 40-52).</p>
+<pre class="r"><code>bike_weekly_avg&lt;-bike%&gt;%
+  mutate(year_corrected=ifelse(month==&quot;Jan&quot;&amp;(week==52|week==53), year-1, ifelse(month==&quot;Dec&quot;&amp;(week==1), year+1, year)))%&gt;%
+  filter(year_corrected %in% c(2017, 2018, 2019, 2020, 2021, 2022))%&gt;%
+  group_by(year_corrected, week)%&gt;%
+  summarise(weekly_avg=mean(bikes_hired))%&gt;%
+  ungroup()
+
+bike_weekly_avg_across_years&lt;-bike%&gt;%
+  mutate(year_corrected=ifelse(month==&quot;Jan&quot;&amp;(week==52|week==53), year-1, ifelse(month==&quot;Dec&quot;&amp;(week==1), year+1, year)))%&gt;%
+  filter(year %in% c(2016, 2017, 2018, 2019))%&gt;%
+  group_by(week)%&gt;%
+  summarise(weekly_avg_across_years=mean(bikes_hired))%&gt;%
+  ungroup()
+
+bike_weekly_avg &lt;- bike_weekly_avg %&gt;%
+  inner_join(bike_weekly_avg_across_years, by = &quot;week&quot;)%&gt;%
+mutate(weekly_change=weekly_avg/weekly_avg_across_years-1)
+
+bike_weekly_avg</code></pre>
+<pre><code>## # A tibble: 296 × 5
+##    year_corrected  week weekly_avg weekly_avg_across_years weekly_change
+##             &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;                   &lt;dbl&gt;         &lt;dbl&gt;
+##  1           2017     1     17662.                  17202.       0.0267 
+##  2           2017     2     21858.                  22056.      -0.00899
+##  3           2017     3     22691.                  21892.       0.0365 
+##  4           2017     4     21269.                  21470.      -0.00933
+##  5           2017     5     21643.                  21194.       0.0212 
+##  6           2017     6     19782.                  20226.      -0.0219 
+##  7           2017     7     24019.                  23254.       0.0329 
+##  8           2017     8     23326.                  23575.      -0.0106 
+##  9           2017     9     21642.                  20167        0.0731 
+## 10           2017    10     26597.                  23403.       0.136  
+## # … with 286 more rows</code></pre>
+<pre class="r"><code>ggplot(bike_weekly_avg, aes(x=week))+geom_line(aes(y=weekly_change))+facet_wrap(~year_corrected, nrow=2)+scale_y_continuous(labels = scales::percent)+scale_x_continuous(breaks=c(13, 26, 39, 53))+theme(legend.position=&quot;none&quot;)+
+  geom_braid(aes(ymin=0, ymax=weekly_change, fill=weekly_change&gt;0))+
+  geom_rect(data=bike_weekly_avg, aes(xmin=13, xmax=26, ymin=-Inf, ymax=Inf), color=&quot;transparent&quot;, fill=&quot;grey20&quot;,  alpha=0.005)+ 
+  geom_rect(data=bike_weekly_avg, aes(xmin=39, xmax=53, ymin=-Inf, ymax=Inf), color=&quot;transparent&quot;, fill=&quot;grey20&quot;,  alpha=0.005)+geom_rug(mapping = aes(color = weekly_change&gt;0), sides=&quot;b&quot;)+
+  labs(title = &quot;Weekly change in TfL bike rentals&quot;,
+       subtitle = &quot;% change from weekly averages calculated between 2016-2019&quot;, 
+       caption = &quot;Source: TfL, London Data Store&quot;,y=element_blank(), x = &quot;Week&quot;)</code></pre>
+<p><img src="/blogs/santander_files/figure-html/Chlng1_plot1-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>I use the mean to calculate expected rentals because according to the law of large numbers the sample mean approaches the expected value of a variable as the sample size grows infinitely large. This property makes the mean superior to median when it comes to calculating expected values.</p>

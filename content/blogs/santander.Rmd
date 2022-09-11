@@ -1,0 +1,143 @@
+---
+categories:  
+- ""    
+- ""
+date: "2022-09-10"
+description: Excess rentals in TfL bike sharing
+draft: false
+image: santander.jpg
+
+keywords: ""
+slug: bike_sharing # slug is the shorthand URL address... no spaces plz
+title: Excess rentals in TfL bike sharing
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, include=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
+library(readxl)
+library(vroom)
+library(wbstats)
+library(countrycode)
+library(patchwork)
+library(gganimate)
+```
+
+```{r, get_tfl_data}
+url <- "https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx"
+
+# Download TFL data to temporary file
+httr::GET(url, write_disk(bike.temp <- tempfile(fileext = ".xlsx")))
+
+# Use read_excel to read it as dataframe
+bike0 <- read_excel(bike.temp,
+                   sheet = "Data",
+                   range = cell_cols("A:B"))
+
+# change dates to get year, month, and week
+bike <- bike0 %>% 
+  clean_names() %>% 
+  rename (bikes_hired = number_of_bicycle_hires) %>% 
+  mutate (year = year(day),
+          month = lubridate::month(day, label = TRUE),
+          week = isoweek(day))
+```
+
+The first one looks at percentage changes from the expected level of
+monthly rentals.
+
+```{r Chlng1_bike_by_month}
+bike_monthly_avg<-bike%>%
+  filter(year %in% c(2017, 2018, 2019, 2020, 2021, 2022))%>%
+  group_by(year, month)%>%
+  summarise(monthly_avg=mean(bikes_hired))%>%
+  ungroup()%>%
+  add_row(year=2022, month="Sep")%>%
+  add_row(year=2022, month="Oct")%>%
+  add_row(year=2022, month="Nov")%>%
+  add_row(year=2022, month="Dec")%>%
+  group_by(year, month)%>%
+  mutate(date=as.Date(paste("01", month, toString(year), sep="/"), "%d/%b/%Y"))
+
+bike_monthly_avg_across_years<-bike%>%
+  filter(year %in% c(2016, 2017, 2018, 2019))%>%
+  group_by(month)%>%
+  summarise(monthly_avg_across_years=mean(bikes_hired))
+
+bike_monthly_avg <-bike_monthly_avg%>% 
+  inner_join(bike_monthly_avg_across_years, by = "month")%>%
+  mutate(monthly_avg_across_years=ifelse(year==2022 & (month %in% c("Sep", "Oct", "Nov", "Dec")), NA, monthly_avg_across_years))
+  
+bike_monthly_avg
+```
+
+```{r Chlng2_plot1, warning=FALSE}
+library(ggbraid)
+
+ggplot(bike_monthly_avg,aes(x=date))+geom_line(aes(y=monthly_avg))+geom_line(aes(y=monthly_avg_across_years), color="blue", size=1)+facet_wrap(~year, scales="free_x", nrow=2) + scale_x_date(date_breaks = "1 month", date_labels = "%b")+
+  geom_braid(aes(ymin=monthly_avg, ymax=monthly_avg_across_years, fill=monthly_avg>monthly_avg_across_years))+theme(legend.position="none")+
+  labs(title = "Monthly changes in TfL bike rentals",
+       subtitle = "Change from monthly average shown in blue and calculated between 2016-2019", 
+       caption = "Source: TfL, London Data Store",y="Bike rentals", x = element_blank())
+```
+
+This graph looks at percentage changes from the expected level of
+weekly rentals. The two grey shaded rectangles correspond to Q2 (weeks
+14-26) and Q4 (weeks 40-52).
+
+```{r Chlng1_bike_by_week, warning=FALSE}
+bike_weekly_avg<-bike%>%
+  mutate(year_corrected=ifelse(month=="Jan"&(week==52|week==53), year-1, ifelse(month=="Dec"&(week==1), year+1, year)))%>%
+  filter(year_corrected %in% c(2017, 2018, 2019, 2020, 2021, 2022))%>%
+  group_by(year_corrected, week)%>%
+  summarise(weekly_avg=mean(bikes_hired))%>%
+  ungroup()
+
+bike_weekly_avg_across_years<-bike%>%
+  mutate(year_corrected=ifelse(month=="Jan"&(week==52|week==53), year-1, ifelse(month=="Dec"&(week==1), year+1, year)))%>%
+  filter(year %in% c(2016, 2017, 2018, 2019))%>%
+  group_by(week)%>%
+  summarise(weekly_avg_across_years=mean(bikes_hired))%>%
+  ungroup()
+
+bike_weekly_avg <- bike_weekly_avg %>%
+  inner_join(bike_weekly_avg_across_years, by = "week")%>%
+mutate(weekly_change=weekly_avg/weekly_avg_across_years-1)
+
+bike_weekly_avg
+```
+
+```{r Chlng1_plot1, warning=FALSE}
+ggplot(bike_weekly_avg, aes(x=week))+geom_line(aes(y=weekly_change))+facet_wrap(~year_corrected, nrow=2)+scale_y_continuous(labels = scales::percent)+scale_x_continuous(breaks=c(13, 26, 39, 53))+theme(legend.position="none")+
+  geom_braid(aes(ymin=0, ymax=weekly_change, fill=weekly_change>0))+
+  geom_rect(data=bike_weekly_avg, aes(xmin=13, xmax=26, ymin=-Inf, ymax=Inf), color="transparent", fill="grey20",  alpha=0.005)+ 
+  geom_rect(data=bike_weekly_avg, aes(xmin=39, xmax=53, ymin=-Inf, ymax=Inf), color="transparent", fill="grey20",  alpha=0.005)+geom_rug(mapping = aes(color = weekly_change>0), sides="b")+
+  labs(title = "Weekly change in TfL bike rentals",
+       subtitle = "% change from weekly averages calculated between 2016-2019", 
+       caption = "Source: TfL, London Data Store",y=element_blank(), x = "Week")
+```
+
+I use the mean to calculate expected rentals because according to the law of large numbers the sample mean approaches the expected value of a variable as the sample size grows infinitely large. This property makes the mean superior to median when it comes to calculating expected values. 
