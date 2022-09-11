@@ -8,7 +8,7 @@ draft: false
 image: biden.jpg
 
 keywords: ""
-slug: Biden_Approval # slug is the shorthand URL address... no spaces plz
+slug: biden_approval # slug is the shorthand URL address... no spaces plz
 title: Biden's Approval Rate in 2021-2022
 ---
 
