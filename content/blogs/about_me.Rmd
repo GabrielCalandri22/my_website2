@@ -1,0 +1,46 @@
+---
+categories:  
+- ""    
+- ""
+date: "2022-09-08"
+description: Introduction Into My Life
+draft: false
+image: family.JPEG
+
+keywords: ""
+slug: about_me # slug is the shorthand URL address... no spaces plz
+title: Introduction Into My Life
+---
+
+# Who am I?
+
+## My Background
+
+My name is Gabriel Calandri. I was born on July 22nd 2000 in New York City, NY, USA. My family comes from Italy and Belgium, but I feel **Italian** in my heart. Before I was 1, I left Big Apple for London, where my younger brother was born. When I was 5, ma family moved again to Brussels, where I grew up until I went to college, in Madrid, Spain. I have 3 younger siblings:
+
+- 2 brothers:
+    + Luca, who's 20
+    + Lorenzo, who's 8
+- 1 sister:
+    + Shanti, who's 12
+    
+## My Studies
+
+At 18 years old, I left Belgium to study a BBA at the IE Business School, in Madrid, Spain. During my bachelor studies, I had the chance to study 1 semester abroad, at the University of Michigan - Ross School of Business, located in Ann Arbor, MI, USA. I had the best time, and enjoyed every minute if it (*Go Blue*). During this university exchange,I uncovered a passion for data analytics, which nourished my desire to pursue the MAM at LBS.
+
+## My Professional Experience
+
+When it comes to working experience, I had the chance to experience several positions, in several companies. In 2019, I worked for 2 months as a strategy Analyst Intern for Baobab Collection, a premium candle manufacturer. I was in charge of contributing to the expansion strategy of the brand in the american market. In 2020, I worked during my summer break for Adneom, a technology consulting company, as a Tech Consultant Intern. My role consisted in analyzing project opportunities and drafting project proposals to prospective clients. In 2021, I was a Business Analyst Intern for Kantar, a research and advisory firm, during 3 months. I led a team of two Analysts to act as client partners to help with their diversification strategy campaign, including performing market research and developing effective cost-reducing models. Finally, in 2022, I interned at Gartner, a technology research and consulting company. I was in charge of delivering technology-related insights to  mid-market C-Level Executives to make timely strategic decisions and align action plans with business objectives to improve returns and capture more market share. 
+
+## My Hobbies
+
+As basic as it may seem, I love sports. On one side, I enjoy traditional sports in my routine including:
+
+- Swimming
+- Tennis
+- Football
+- Boxing
+
+In addition to these, I love even more extreme sports. I have been skiing since I was 3 and snowboarding since I was 12. In 2013, I was introduced to kite surfing, and it became my go-to sport. Since then, my family and I travel the world during our holidays to find the best kiting spots! 
+
+

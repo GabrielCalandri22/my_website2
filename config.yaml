@@ -67,30 +67,30 @@ params:
     links:
       - name: Home
         url: '#'
-      - name: Blogs
-        url: blogs
-      - name: Generic Blog
-        url: blogs/ipsum
-      - name: Elements
-        url: elements.html
+      # - name: Blogs
+      #   url: blogs
+      # - name: Generic Blog
+      #   url: blogs/ipsum
+      # - name: Elements
+      #   url: elements.html
     menu: Menu
-    subtitle: By HTML5 Up
-    title: Forty
+    subtitle: By Gabriel Calandri
+    title: Project Portfolio
   tiles:
     enable: yes
     showcase:
       - image: kiting.jpg
         subtitle: Deep Dive Into Who I Am
         title: About Me
-        url: blogs/aliquam
+        url: blogs/about_me
       - image: biden.jpg
         subtitle: Evolution of Joe Biden's Approval Margins Over the Year 2022
         title: Biden's Approval Margins
         url: blogs/biden_approval
-      - image: pic06.jpg
-        subtitle: Stock Market Study
-        title: Risk-Return of DJIA stocks
-        url: blogs/risk_return
+      - image: 4renewables.jpg
+        subtitle: Study of the Share of Rewewable Energy Production around the Globe
+        title: Rewewable Energy Production Across the World
+        url: blogs/renewables
       - image: pic04.jpg
         subtitle: Nisl Sed Aliquam
         title: Ipsum

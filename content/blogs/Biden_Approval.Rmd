@@ -80,11 +80,10 @@ approval_polllist %>%
     lower95 = mean_net_approve - qt(0.975,count-1)*se,
     upper95 = mean_net_approve + qt(0.975,count-1)*se) %>% 
 
-ggplot(aes(x = week, y=mean_net_approve))+
+ggplot(aes(x = week, y=mean_net_approve, color = subgroup))+
   geom_line()+
   facet_wrap(~subgroup, nrow=3)+
-  geom_ribbon(aes(ymin = lower95, ymax = upper95), alpha=0.35, fill = "orange", 
-             linetype = "solid", nrow=3)+
+  geom_ribbon(aes(ymin = lower95, ymax = upper95), alpha=0.2,linetype = "solid", nrow=3)+
   theme_bw()+
   labs(title = "Biden's Net Approval Ratings in 2022",
     subtitle = "Weekly Data, Approve - Disapprove, %",
