@@ -62,14 +62,9 @@ approval_polllist <- approval_polllist %>%
          week = week(enddate)) 
 ```
 
-## Create a plot
+## Plot 
 
-What I would like you to do is to calculate the average net approval
-rate (approve- disapprove) for each week since he got into office. I
-want you plot the net approval for each week in 2022, along with its 95%
-confidence interval. There are various dates given for each poll, please
-use `enddate`, i.e., the date the poll ended. Your plot should look
-something like this:
+This plot shows the net approval rate of Joe Biden for the 3 subroup of voters, highlighting also the 95% confidence interval. 
 
 ```{r net_approve_rate graph}
 approval_polllist %>% 
