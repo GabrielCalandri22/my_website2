@@ -1,0 +1,67 @@
+---
+title: "Session 4: Homework 2"
+author: "Study Group 2"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: flatly
+    highlight: zenburn
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+    code_folding: show
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+# Who am I?
+
+## My Background
+
+My name is Gabriel Calandri. I was born on July 22nd 2000 in New York City, NY, USA. My family comes from Italy and Belgium, but I feel **Italian** in my heart. DBefore I was 1, I left Big Apple for London, where my younger brother was born. When I was 5, ma family moved again to Brussels, where I grew up until I went to college, in Madrid, Spain. I have 3 younger siblings:
+
+- 2 brothers:
+    + Luca, who's 20
+    + Lorenzo, who's 8
+- 1 sister:
+    + Shanti, who's 12
+    
+! [Alt text] (~/Academics/LBS/Lectures/Applied Statistics with R/about_me/NYC.jpg)
+    
+## My Studies
+
+At 18 years old, I left Belgium to study a BBA at the IE Business School, in Madrid, Spain. During my bachelor studies, I had the chance to study 1 semester abroad, at the University of Michigan - Ross School of Business, located in Ann Arbor, MI, USA. I had the best time, and enjoyed every minute if it (*Go Blue*). During this university exchange,I uncovered a passion for data analytics, which nourished my desire to pursue the MAM at LBS.
+
+## My Professional Experience
+
+
+
+## My Hobbies
+
+As basic as it may seem, I love sports. On one side, I enjoy traditional sports in my routine including:
+
+- Swimming
+- Tennis
+- Football
+- Boxing
+
+In addition to these, I love even more extreme sports. I have been skiing since I was 3 and snowboarding since I was 12. In 2013, I was introduced to kite surfing, and it became my go-to sport. Since then, my family and I travel the world during our holidays to find the best kiting spots! 
+
+

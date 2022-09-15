@@ -5,7 +5,7 @@ theme: forty
 googleAnalytics: ''
 disqusShortname: ''
 params:
-  banner: 
+  banner:
     buttonText: Get Started
     subtitle: Hi, my name is Gabriel Calandri. I am currently a MAM Student at LBS and am pleased to present you some pieces of my life and my work done so far.
     title: Gabriel Calandri's Portfolio
@@ -83,6 +83,10 @@ params:
         subtitle: Deep Dive Into Who I Am
         title: About Me
         url: blogs/about_me
+      - image: growth.jpg
+        subtitle: 
+        title: My CV
+        url: docs/cv_gabriel_calandri.pdf
       - image: biden.jpg
         subtitle: Evolution of Joe Biden's Approval Margins Over the Year 2022
         title: Biden's Approval Margins
@@ -95,10 +99,6 @@ params:
         subtitle: Study of the excess in rentals of TFL sharing bikes during the period 2017-2022
         title: Excess Rentals in TFL Bike Sharing
         url: blogs/bike_sharing
-      # - image: pic05.jpg
-      #   subtitle: Ipsum Dolor Sit Amet
-      #   title: Consequat
-      #   url: blogs/ipsum
       # - image: pic06.jpg
       #   subtitle: Feugiat Amet Tempus
       #   title: Etiam
