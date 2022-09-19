@@ -5,7 +5,7 @@ theme: forty
 googleAnalytics: ''
 disqusShortname: ''
 params:
-  banner1:
+  banner:
     buttonText: Get Started
     subtitle: Hi, my name is Gabriel Calandri. I am currently a MAM Student at LBS and am pleased to present you some pieces of my life and my work done so far.
     title: Gabriel Calandri's Portfolio
@@ -62,8 +62,8 @@ params:
       - name: My Projects
         url: projects
     # button2:
-    #   - name: My Projects
-    #     url: projects
+    #   - name: Get Started
+    #     url: '#'
     links:
       - name: Home
         url: '#'
