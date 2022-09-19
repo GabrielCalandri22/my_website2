@@ -18,12 +18,12 @@ title: Excess rentals in TfL bike sharing
 
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2022-09-06T12%3A41%3A48/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20220919%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220919T131122Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=deb1d6ebe79bda70c75bbe38f1e03bc2435b0f436f5ae7c06030a21a1d6892d1&amp;X-Amz-SignedHeaders=host]
-##   Date: 2022-09-19 13:11
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2022-09-06T12%3A41%3A48/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20220919%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20220919T132703Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=94560235fddb8abec5c25ae5cdd2b43e63fab1f8b962621790db52ef86c16da8&amp;X-Amz-SignedHeaders=host]
+##   Date: 2022-09-19 13:27
 ##   Status: 200
 ##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 ##   Size: 180 kB
-## &lt;ON DISK&gt;  C:\Users\GABRIE~1\AppData\Local\Temp\RtmpspEWSx\file100c301c55bf.xlsx</code></pre>
+## &lt;ON DISK&gt;  C:\Users\GABRIE~1\AppData\Local\Temp\Rtmp4KXTLW\file601c11951c51.xlsx</code></pre>
 <pre class="r"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
@@ -82,7 +82,7 @@ ggplot(bike_monthly_avg,aes(x=date))+geom_line(aes(y=monthly_avg))+geom_line(aes
   labs(title = &quot;Monthly changes in TfL bike rentals&quot;,
        subtitle = &quot;Change from monthly average shown in blue and calculated between 2016-2019&quot;, 
        caption = &quot;Source: TfL, London Data Store&quot;,y=&quot;Bike rentals&quot;, x = element_blank())</code></pre>
-<p><img src="/Projects/santander_files/figure-html/Chlng2_plot1-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/projects/santander_files/figure-html/Chlng2_plot1-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>This graph looks at percentage changes from the expected level of
 weekly rentals. The two grey shaded rectangles correspond to Q2 (weeks
 14-26) and Q4 (weeks 40-52).</p>
@@ -126,5 +126,5 @@ bike_weekly_avg</code></pre>
   labs(title = &quot;Weekly change in TfL bike rentals&quot;,
        subtitle = &quot;% change from weekly averages calculated between 2016-2019&quot;, 
        caption = &quot;Source: TfL, London Data Store&quot;,y=element_blank(), x = &quot;Week&quot;)</code></pre>
-<p><img src="/Projects/santander_files/figure-html/Chlng1_plot1-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/projects/santander_files/figure-html/Chlng1_plot1-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>I use the mean to calculate expected rentals because according to the law of large numbers the sample mean approaches the expected value of a variable as the sample size grows infinitely large. This property makes the mean superior to median when it comes to calculating expected values.</p>

@@ -3,13 +3,13 @@ categories:
 - ""    
 - ""
 date: "2022-09-11"
-description: Rewewable Energy production across the World
+description: Renewable Energy production across the World
 draft: false
 image: wind.jpg
 
 keywords: ""
 slug: renewables # slug is the shorthand URL address... no spaces plz
-title: Rewewable Energy production across the World
+title: Renewable Energy production across the World
 ---
 
 

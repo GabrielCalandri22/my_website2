@@ -59,11 +59,11 @@ params:
   name: Gabriel Calandri
   navigation:
     button1:
-      - name: About Me
-        url: about_me
-    button2:
       - name: My Projects
         url: projects
+    # button2:
+    #   - name: My Projects
+    #     url: projects
     links:
       - name: Home
         url: '#'
@@ -82,7 +82,7 @@ params:
       - image: kiting.jpg
         subtitle: Deep Dive Into Who I Am
         title: About Me
-        url: about_me/about_me
+        url: about_me/me
       - image: growth.jpg
         subtitle: 
         title: My CV
@@ -108,7 +108,7 @@ params:
       #   title: Etiam
       #   url: blogs/ipsum
   two:
-    buttonText: Projects
+    buttonText: My Projects
     enable: yes
     subtitle: "A glimpse at some projects I worked on during my time at LBS."
     title: My LBS Projects
