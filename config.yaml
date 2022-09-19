@@ -91,10 +91,10 @@ params:
         subtitle:
         title: Extra-Curricular Certification
         url: about_me/BGS.pdf
-      # - image: biden.jpg
-      #   subtitle: Study of Joe Biden's Approval Margins Evolution Over the Year 2022
-      #   title: Biden's Approval Margins
-      #   url: Projects/biden_approval
+      - image: stonks.jpg
+        subtitle: 
+        title: Online Course Certification
+        url: about_me/BMC.jpg
       # - image: 4renewables.JPEG
       #   subtitle: Study of the Share of Rewewable Energy Production around the Globe
       #   title: Renewable Energy Production Across the World
