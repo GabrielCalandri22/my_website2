@@ -59,11 +59,11 @@ params:
   name: Gabriel Calandri
   navigation:
     button1:
-      - name: Get Started
-        url: blogs
+      - name: About Me
+        url: about_me
     button2:
-      - name: Log In
-        url: '#'
+      - name: My Projects
+        url: projects
     links:
       - name: Home
         url: '#'
@@ -82,39 +82,34 @@ params:
       - image: kiting.jpg
         subtitle: Deep Dive Into Who I Am
         title: About Me
-        url: blogs/about_me
+        url: about_me/about_me
       - image: growth.jpg
         subtitle: 
         title: My CV
-        url: docs/cv_gabriel_calandri.pdf
+        url: about_me/cv_gabriel_calandri.pdf
       - image: success.png
         subtitle:
         title: Extra-Curricular Certification
-        url: docs/BGS.pdf
-      - image: biden.jpg
-        subtitle: Study of Joe Biden's Approval Margins Evolution Over the Year 2022
-        title: Biden's Approval Margins
-        url: blogs/biden_approval
-      - image: 4renewables.JPEG
-        subtitle: Study of the Share of Rewewable Energy Production around the Globe
-        title: Renewable Energy Production Across the World
-        url: blogs/renewables
-      - image: santander.JPEG
-        subtitle: Study of the excess in rentals of TFL sharing bikes during the period 2017-2022
-        title: Excess Rentals in TFL Bike Sharing
-        url: blogs/bike_sharing
+        url: about_me/BGS.pdf
+      # - image: biden.jpg
+      #   subtitle: Study of Joe Biden's Approval Margins Evolution Over the Year 2022
+      #   title: Biden's Approval Margins
+      #   url: Projects/biden_approval
+      # - image: 4renewables.JPEG
+      #   subtitle: Study of the Share of Rewewable Energy Production around the Globe
+      #   title: Renewable Energy Production Across the World
+      #   url: Projects/renewables
+      # - image: santander.JPEG
+      #   subtitle: Study of the excess in rentals of TFL sharing bikes during the period 2017-2022
+      #   title: Excess Rentals in TFL Bike Sharing
+      #   url: Projects/bike_sharing
       # - image: pic06.jpg
       #   subtitle: Feugiat Amet Tempus
       #   title: Etiam
       #   url: blogs/ipsum
   two:
-    # buttonText: Get Started
-    # enable: yes
-    # subtitle: "Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero.
-    #   \r\n    Mauris aliquet magna magna sed nunc rhoncus pharetra. \r\n    Pellentesque
-    #   condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia
-    #   pellentesque lorem ipsum dolor. \r\n    Nullam et orci eu lorem consequat tincidunt.
-    #   Vivamus et sagittis libero.\r\n    Mauris aliquet magna magna sed nunc rhoncus
-    #   amet pharetra et feugiat tempus."
-    # title: Massa libero
-    # url: blogs
+    buttonText: Projects
+    enable: yes
+    subtitle: "A glimpse at some projects I worked on during my time at LBS."
+    title: My LBS Projects
+    url: projects
