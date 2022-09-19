@@ -87,7 +87,7 @@ params:
         subtitle: 
         title: My CV
         url: about_me/cv_gabriel_calandri.pdf
-      - image: success.png
+      - image: success_on_top.jpg
         subtitle:
         title: Extra-Curricular Certification
         url: about_me/BGS.pdf
