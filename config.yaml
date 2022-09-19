@@ -87,6 +87,10 @@ params:
         subtitle: 
         title: My CV
         url: docs/cv_gabriel_calandri.pdf
+      - image: success.png
+        subtitle:
+        title: Extra-Curricular Certification
+        url: docs/BGS.pdf
       - image: biden.jpg
         subtitle: Study of Joe Biden's Approval Margins Evolution Over the Year 2022
         title: Biden's Approval Margins

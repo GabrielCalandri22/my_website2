@@ -5,7 +5,7 @@ categories:
 date: "2022-09-08"
 description: Introduction Into My Life
 draft: false
-image: family.JPEG
+image: gabriel.JPEG
 
 keywords: ""
 slug: about_me # slug is the shorthand URL address... no spaces plz
@@ -16,13 +16,7 @@ title: Introduction Into My Life
 
 ## My Background
 
-My name is Gabriel Calandri. I was born on July 22nd 2000 in New York City, NY, USA. My family comes from Italy and Belgium, but I feel **Italian** in my heart. Before I was 1, I left Big Apple for London, where my younger brother was born. When I was 5, ma family moved again to Brussels, where I grew up until I went to college, in Madrid, Spain. I have 3 younger siblings:
-
-- 2 brothers:
-    + Luca, who's 20
-    + Lorenzo, who's 8
-- 1 sister:
-    + Shanti, who's 12
+My name is Gabriel Calandri. I was born on July 22nd 2000 in New York City, NY, USA. My family comes from Italy and Belgium, but I feel **Italian** in my heart. Before I was 1, I left Big Apple for London, where my younger brother was born. When I was 5, ma family moved again to Brussels, where I grew up until I went to college, in Madrid, Spain. I have 3 younger siblings: 2 borthers and 1 sister.
     
 ## My Studies
 
